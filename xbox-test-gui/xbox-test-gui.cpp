@@ -34,7 +34,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // TODO: Place code here.
 
-    if (!CoInitializeEx(NULL, COINIT_APARTMENTTHREADED))
+    if (FAILED(CoInitializeEx(NULL, COINIT_APARTMENTTHREADED)))
         return FALSE;
 
     // Initialize global strings
