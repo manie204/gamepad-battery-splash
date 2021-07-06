@@ -20,7 +20,9 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 
 // Forward declarations of functions included in this code module:
 ATOM MyRegisterClass(HINSTANCE hInstance);
-BOOL InitInstance(HINSTANCE, int);
+BOOL InitInstance(HINSTANCE);
+void ControlApp(HWND hWnd);
+
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -29,6 +31,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
+    UNREFERENCED_PARAMETER(nCmdShow);
 
     // TODO: Place code here.
 
@@ -41,23 +44,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MyRegisterClass(hInstance);
 
     // Perform application initialization:
-    if (!InitInstance (hInstance, nCmdShow))
-    {
+    if (!InitInstance(hInstance))
         return FALSE;
-    }
 
-    std::thread thread(
-        [](HWND hWnd)
-        {
-            for (int t = 0; t < 10; ++t)
-            {
-                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-                ShowWindow(hWnd, SW_HIDE);
-                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-                ShowWindow(hWnd, SW_SHOW);
-            }
-        }, my_hWnd
-    );
+    std::thread thread(ControlApp, my_hWnd);
 
     MSG msg;
 
@@ -74,12 +64,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 }
 
 
-
-//
-//  FUNCTION: MyRegisterClass()
-//
-//  PURPOSE: Registers the window class.
-//
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
     WNDCLASSEXW wcex;
@@ -101,17 +85,8 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     return RegisterClassExW(&wcex);
 }
 
-//
-//   FUNCTION: InitInstance(HINSTANCE, int)
-//
-//   PURPOSE: Saves instance handle and creates main window
-//
-//   COMMENTS:
-//
-//        In this function, we save the instance handle in a global variable and
-//        create and display the main program window.
-//
-BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
+
+BOOL InitInstance(HINSTANCE hInstance)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
@@ -119,15 +94,29 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
-   {
-      return FALSE;
-   }
+       return FALSE;
 
    HBITMAP bitmap = LoadSplashImage(IDB_PNG2);
    SetSplashImage(hWnd, bitmap);
-   ShowWindow(hWnd, nCmdShow);
+   ShowWindow(hWnd, SW_HIDE);
 
    my_hWnd = hWnd;
 
    return TRUE;
+}
+
+
+void ControlApp(HWND hWnd)
+{
+    while (true)
+    {
+        if (GetBatteryLevel(0) != BatteryLevel::UNKNOWN)
+        {
+            ShowWindow(hWnd, SW_SHOW);
+            std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+            ShowWindow(hWnd, SW_HIDE);
+        }
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    }
 }
