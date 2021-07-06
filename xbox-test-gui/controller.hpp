@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Xinput.h>
-#pragma comment(lib, "xinput1_4.dll")
+#pragma comment(lib, "xinput.lib")
 
 enum class BatteryLevel
 {
