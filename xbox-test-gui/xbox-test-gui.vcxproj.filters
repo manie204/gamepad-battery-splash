@@ -33,9 +33,15 @@
     <ClInclude Include="controller.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BitmapDrawer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="xbox-test-gui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapDrawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

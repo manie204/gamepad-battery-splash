@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BitmapDrawer.h" />
     <ClInclude Include="controller.hpp" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="image-loading.hpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="xbox-test-gui.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BitmapDrawer.cpp" />
     <ClCompile Include="xbox-test-gui.cpp" />
   </ItemGroup>
   <ItemGroup>

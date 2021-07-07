@@ -5,6 +5,7 @@
 #include "xbox-test-gui.h"
 
 #include "image-loading.hpp"
+#include "BitmapDrawer.h"
 #include "controller.hpp"
 
 #include <thread>
@@ -13,15 +14,15 @@
 #define MAX_LOADSTRING 100
 
 // Global Variables:
-HINSTANCE hInst;                                // current instance
-HWND my_hWnd;
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
+
+std::unique_ptr<BitmapDrawer> drawer;
 
 // Forward declarations of functions included in this code module:
 ATOM MyRegisterClass(HINSTANCE hInstance);
 BOOL InitInstance(HINSTANCE);
-void ControlApp(HWND hWnd);
+void ControlApp(std::unique_ptr<BitmapDrawer> drawer);
 
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -47,7 +48,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     if (!InitInstance(hInstance))
         return FALSE;
 
-    std::thread thread(ControlApp, my_hWnd);
+    std::thread thread(ControlApp, std::move(drawer));
 
     MSG msg;
 
@@ -88,33 +89,30 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 
 BOOL InitInstance(HINSTANCE hInstance)
 {
-   hInst = hInstance; // Store instance handle in our global variable
-
    HWND hWnd = CreateWindowExW(WS_EX_TOOLWINDOW | WS_EX_LAYERED | WS_EX_TOPMOST | WS_EX_NOACTIVATE | WS_EX_TRANSPARENT, szWindowClass, szTitle, WS_POPUP,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
        return FALSE;
 
-   HBITMAP bitmap = LoadSplashImage(IDB_PNG2);
-   SetSplashImage(hWnd, bitmap);
-   ShowWindow(hWnd, SW_HIDE);
-
-   my_hWnd = hWnd;
+   HBITMAP hBitmap = LoadSplashImage(IDB_PNG2);
+   drawer = std::make_unique<BitmapDrawer>(hWnd, hBitmap);
+   drawer->Update();
+   drawer->Hide();
 
    return TRUE;
 }
 
 
-void ControlApp(HWND hWnd)
+void ControlApp(std::unique_ptr<BitmapDrawer> drawer)
 {
     while (true)
     {
         if (GetBatteryLevel(0) != BatteryLevel::UNKNOWN)
         {
-            ShowWindow(hWnd, SW_SHOW);
+            drawer->Show();
             std::this_thread::sleep_for(std::chrono::milliseconds(3000));
-            ShowWindow(hWnd, SW_HIDE);
+            drawer->Hide();
         }
 
         std::this_thread::sleep_for(std::chrono::milliseconds(5000));
