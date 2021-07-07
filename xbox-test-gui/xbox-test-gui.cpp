@@ -11,6 +11,9 @@
 #include <thread>
 #include <chrono>
 
+#include <dwmapi.h>
+#pragma comment(lib, "dwmapi.lib")
+
 #define MAX_LOADSTRING 100
 
 // Global Variables:
@@ -106,6 +109,26 @@ BOOL InitInstance(HINSTANCE hInstance)
 
 void ControlApp(std::unique_ptr<BitmapDrawer> drawer)
 {
+    drawer->Show();
+
+    const float durationSeconds = 10;
+    const int fps = 144;
+
+    const int numFrames = durationSeconds * fps;
+    const auto frameDuration = std::chrono::microseconds(1000 * 1000 / fps);
+    const int alphaPerFrame = 256 / numFrames;
+
+    for (int frame = 1; frame <= numFrames; ++frame)
+    {
+        float alpha = 256 - frame * 256.f / numFrames;
+        BYTE alphaByte = std::min(256, std::max(0, int(alpha)));
+
+        drawer->Update(alphaByte);
+        DwmFlush();
+    }
+
+    drawer->Hide();
+
     while (true)
     {
         if (GetBatteryLevel(0) != BatteryLevel::UNKNOWN)
