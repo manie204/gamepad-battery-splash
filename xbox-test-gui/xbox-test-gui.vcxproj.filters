@@ -63,9 +63,6 @@
     <Image Include="xbox-test-gui.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="bear.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="battery.png">
       <Filter>Resource Files</Filter>
     </Image>

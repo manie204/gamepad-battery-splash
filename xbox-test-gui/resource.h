@@ -12,8 +12,8 @@
 #define IDI_SMALL                       108
 #define IDC_XBOXTESTGUI                 109
 #define IDR_MAINFRAME                   128
-#define IDB_PNG1                        129
 #define IDB_PNG2                        130
+#define IDB_BATTERY                     130
 #define IDC_STATIC                      -1
 
 // Next default values for new objects

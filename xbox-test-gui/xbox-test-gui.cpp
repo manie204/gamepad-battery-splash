@@ -93,7 +93,7 @@ BOOL InitInstance(HINSTANCE hInstance)
    if (!hWnd)
        return FALSE;
 
-   HBITMAP hBitmap = LoadSplashImage(IDB_PNG2);
+   HBITMAP hBitmap = LoadSplashImage(IDB_BATTERY);
    drawer = std::make_unique<BitmapDrawer>(hWnd, hBitmap);
    drawer->Update();
    drawer->Hide();

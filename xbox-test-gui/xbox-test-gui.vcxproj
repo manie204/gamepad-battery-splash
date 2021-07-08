@@ -158,7 +158,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="battery.png" />
-    <Image Include="bear.png" />
     <Image Include="small.ico" />
     <Image Include="xbox-test-gui.ico" />
   </ItemGroup>
