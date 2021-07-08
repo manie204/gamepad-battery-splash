@@ -108,14 +108,19 @@ void ControlApp(std::unique_ptr<BitmapDrawer> drawer)
 
     while (true)
     {
-        if (GetBatteryLevel(0) != BatteryLevel::UNKNOWN)
+        for (int playerID = 0; playerID < 4; ++playerID)
         {
-            drawer->Show();
-            std::this_thread::sleep_for(std::chrono::milliseconds(3000));
-            Animator(1500).Animate(*drawer, fade);
-            drawer->Hide();
+            auto batteryLevel = GetBatteryLevel(playerID);
+            if (batteryLevel == BatteryLevel::LOW || batteryLevel == BatteryLevel::EMPTY)
+            {
+                drawer->Show();
+                std::this_thread::sleep_for(std::chrono::seconds(5));
+                Animator(1500).Animate(*drawer, fade);
+                drawer->Hide();
+                break;
+            }
         }
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+        std::this_thread::sleep_for(std::chrono::minutes(5));
     }
 }
