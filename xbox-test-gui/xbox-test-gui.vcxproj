@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animator.h" />
     <ClInclude Include="BitmapDrawer.h" />
     <ClInclude Include="controller.hpp" />
     <ClInclude Include="framework.h" />
@@ -148,6 +149,7 @@
     <ClInclude Include="xbox-test-gui.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animator.cpp" />
     <ClCompile Include="BitmapDrawer.cpp" />
     <ClCompile Include="xbox-test-gui.cpp" />
   </ItemGroup>

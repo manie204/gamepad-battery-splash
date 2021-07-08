@@ -47,6 +47,7 @@ void BitmapDrawer::SetBlendStruct()
 void BitmapDrawer::Show()
 {
     ShowWindow(window, SW_SHOW);
+    Update();
 }
 
 void BitmapDrawer::Hide()
