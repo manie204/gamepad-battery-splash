@@ -15,11 +15,14 @@
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 
+const WCHAR mutexName[] = L"gamepad-battery-gui-mutex1337";
+
 std::unique_ptr<BitmapDrawer> drawer;
 
 // Forward declarations of functions included in this code module:
 ATOM MyRegisterClass(HINSTANCE hInstance);
 BOOL InitInstance(HINSTANCE);
+bool IsAppAlreadyRunning();
 void ControlApp(std::unique_ptr<BitmapDrawer> drawer);
 
 
@@ -32,10 +35,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
     UNREFERENCED_PARAMETER(nCmdShow);
 
-    // TODO: Place code here.
+    if (IsAppAlreadyRunning())
+        return 0;
 
     if (FAILED(CoInitializeEx(NULL, COINIT_APARTMENTTHREADED)))
-        return FALSE;
+        return 0;
 
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -44,7 +48,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // Perform application initialization:
     if (!InitInstance(hInstance))
-        return FALSE;
+        return 0;
 
     std::thread thread(ControlApp, std::move(drawer));
 
@@ -99,6 +103,12 @@ BOOL InitInstance(HINSTANCE hInstance)
    drawer->Hide();
 
    return TRUE;
+}
+
+
+bool IsAppAlreadyRunning()
+{
+    return CreateMutex(NULL, TRUE, mutexName) == NULL || GetLastError() == ERROR_ALREADY_EXISTS;
 }
 
 
