@@ -29,7 +29,8 @@ BatteryLevel GetBatteryLevel(int playerNum)
 {
 	XINPUT_BATTERY_INFORMATION batteryInfo;
 	auto success = XInputGetBatteryInformation(DWORD(playerNum), BATTERY_DEVTYPE_GAMEPAD, &batteryInfo);
-	if (success == 0)
+
+	if (success == 0 && batteryInfo.BatteryType != BATTERY_TYPE_DISCONNECTED && batteryInfo.BatteryType != BATTERY_TYPE_WIRED)
 		return TranslateBatteryLevel(batteryInfo.BatteryLevel);
 	else
 		return BatteryLevel::UNKNOWN;
