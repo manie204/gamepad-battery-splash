@@ -15,7 +15,7 @@
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 
-const WCHAR mutexName[] = L"gamepad-battery-gui-mutex1337";
+const WCHAR mutexName[] = L"gamepad-battery-splash-mutex1337";
 
 std::unique_ptr<BitmapDrawer> drawer;
 
@@ -38,7 +38,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     if (IsAppAlreadyRunning())
         return 0;
 
-    if (FAILED(CoInitializeEx(NULL, COINIT_APARTMENTTHREADED)))
+    if (FAILED(CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED)))
         return 0;
 
     // Initialize global strings
@@ -108,7 +108,7 @@ BOOL InitInstance(HINSTANCE hInstance)
 
 bool IsAppAlreadyRunning()
 {
-    return CreateMutex(NULL, TRUE, mutexName) == NULL || GetLastError() == ERROR_ALREADY_EXISTS;
+    return CreateMutex(nullptr, TRUE, mutexName) == nullptr || GetLastError() == ERROR_ALREADY_EXISTS;
 }
 
 

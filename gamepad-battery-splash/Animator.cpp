@@ -8,7 +8,7 @@
 Animator::Animator(int durationMilliSecs)
 {
     DEVMODEA deviceInfo;
-    EnumDisplaySettingsA(NULL, ENUM_CURRENT_SETTINGS, &deviceInfo);
+    EnumDisplaySettingsA(nullptr, ENUM_CURRENT_SETTINGS, &deviceInfo);
     numFrames = durationMilliSecs * deviceInfo.dmDisplayFrequency / 1000;
 }
 

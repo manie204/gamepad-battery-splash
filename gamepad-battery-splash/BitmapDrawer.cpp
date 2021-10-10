@@ -4,7 +4,7 @@ BitmapDrawer::BitmapDrawer(HWND window, HBITMAP hBitmap)
     : window(window)
     , hBitmap(hBitmap)
 {
-    hdcScreen = GetDC(NULL);
+    hdcScreen = GetDC(nullptr);
     hdcMem = CreateCompatibleDC(hdcScreen);
 
     SetBitmapParams();
@@ -14,7 +14,7 @@ BitmapDrawer::BitmapDrawer(HWND window, HBITMAP hBitmap)
 BitmapDrawer::~BitmapDrawer()
 {
     DeleteDC(hdcMem);
-    ReleaseDC(NULL, hdcScreen);
+    ReleaseDC(nullptr, hdcScreen);
 }
 
 void BitmapDrawer::SetBitmapParams()
