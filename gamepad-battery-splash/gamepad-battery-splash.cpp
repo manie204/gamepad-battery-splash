@@ -1,6 +1,3 @@
-// gamepad-battery-splash.cpp : Defines the entry point for the application.
-//
-
 #include "framework.h"
 #include "gamepad-battery-splash.h"
 
