@@ -146,20 +146,20 @@
     <ClInclude Include="image-loading.hpp" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="xbox-test-gui.h" />
+    <ClInclude Include="gamepad-battery-splash.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="BitmapDrawer.cpp" />
-    <ClCompile Include="xbox-test-gui.cpp" />
+    <ClCompile Include="gamepad-battery-splash.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="xbox-test-gui.rc" />
+    <ResourceCompile Include="gamepad-battery-splash.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="battery.png" />
     <Image Include="small.ico" />
-    <Image Include="xbox-test-gui.ico" />
+    <Image Include="gamepad-battery-splash.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

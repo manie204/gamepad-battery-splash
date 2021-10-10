@@ -1,8 +1,8 @@
-// xbox-test-gui.cpp : Defines the entry point for the application.
+// gamepad-battery-splash.cpp : Defines the entry point for the application.
 //
 
 #include "framework.h"
-#include "xbox-test-gui.h"
+#include "gamepad-battery-splash.h"
 
 #include "image-loading.hpp"
 #include "BitmapDrawer.h"

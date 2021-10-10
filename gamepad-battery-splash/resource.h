@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by xbox-test-gui.rc
+// Used by gamepad-battery-splash.rc
 //
 #define IDC_MYICON                      2
 #define IDD_XBOXTESTGUI_DIALOG          102
