@@ -3,6 +3,14 @@ Displays a little splash-screen overlay on the top of the screen when a wireless
 
 ![splash-animation](https://github.com/manie204/gamepad-battery-splash/blob/master/splash-animation.gif)
 
+## How to Use
+
+There is no installation/configuration. Just run the program.
+It will be sitting idly in the background and checks battery levels once every few minutes.
+There can only be one instance running at the same time.
+
+I suggest adding the app to autostart to always have it running.
+
 ## Current Limitations
 
 I would like to work on these in the future. However, I don't have much time currently.
