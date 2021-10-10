@@ -12,3 +12,4 @@ I would like to work on these in the future. However, I don't have much time cur
 * Only displays correctly on top of apps that do *not* run in exclusive full-screen mode
 * No multi-monitor support
 * No option for notifications (toast noficiations, sounds, etc.)
+* Only works on Windows
